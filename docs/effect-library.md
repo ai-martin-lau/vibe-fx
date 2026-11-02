@@ -1,8 +1,8 @@
 # 动效库 Effect library
 
-63 个可复用动效，代码在 `engine/effects/fx.js`（自写；3D 部分用 three.js，MIT）。每个效果 2.5 秒样片，在目录片里带编号和中文名。
+63个可复用动效，代码在 `engine/effects/fx.js`（自写；3D 部分用 three.js，MIT）。每个效果2.5秒样片，在目录片里带编号和中文名。
 
-**用法**：每部片子从下表挑 3–5 个，把它们分配到这些节拍：钩子（前 2 秒）、揭示、数字时刻、结尾。至少要有一个 G 类（生图×代码），符合 playbook §3.6。
+**用法**：每部片子从下表挑3–5个，把它们分配到这些节拍：钩子（前2秒）、揭示、数字时刻、结尾。至少要有一个 G 类（生图×代码），符合 playbook §3.6。
 
 ```html
 <script src="../../engine/effects/fx.js"></script>
@@ -13,26 +13,26 @@ S.push({id:'hook',draw(t,lt){FXR.k_slam.draw(lt,2.5,t)}});
 </script>
 ```
 
-- 总览：目录片约 142 秒，用下面「整部目录片」的命令生成；每个效果的预览 GIF 在 `docs/previews/<id>.gif`。
+- 总览：目录片约142秒，用下面「整部目录片」的命令生成；每个效果的预览 GIF 在 `docs/previews/<id>.gif`。
 - 单个效果一条命令出片：`examples/effect-library/one.sh <id>`，产物在 `examples/effect-library/out/test/test.mp4`。
 - 整部目录片：`cd examples/effect-library && python3 gen.py && ../../engine/make.sh .`
-- 成本：● 纯 2D 便宜，●● 是 3D 或要用生图。3D 效果每个会建一个 WebGL 上下文（懒加载），一部片里最多用 6 个左右。
+- 成本：● 纯2D 便宜，●● 是3D 或要用生图。3D 效果每个会建一个 WebGL 上下文（懒加载），一部片里最多用6个左右。
 - 参数：`FXP[id]` 里的键。没列参数的效果，直接复制函数改文案。
 
-## 前 2 秒钩子最强的 10 个
+## 前2秒钩子最强的10个
 
 | # | id | 为什么适合当钩子 |
 |---|---|---|
-| 1 | `k_slam` | 0.3 秒砸下来，带白闪和震动，第一帧就有冲击 |
+| 1 | `k_slam` | 0.3秒砸下来，带白闪和震动，第一帧就有冲击 |
 | 2 | `n_counter` | 数字往上狂涨，再弹一下，"数字型钩子"首选 |
 | 3 | `c_orbit` | 3D 金币堆环绕，大场面开局 |
-| 4 | `g_depthPlate` | 生图场景伪 3D 推镜，一秒交代年代和人物环境 |
+| 4 | `g_depthPlate` | 生图场景伪3D 推镜，一秒交代年代和人物环境 |
 | 5 | `t_shatter` | "你以为" 碎掉，露出 "其实"，反常识开头 |
 | 6 | `g_img2particles` | 实物炸成粒子，再聚成一个词，最有记忆点 |
 | 7 | `k_scramble` | 乱码解出一句话，制造悬念 |
 | 8 | `t_glitch` | 故障闪断，适合反转、打脸 |
 | 9 | `c_dutch` | 坏消息配冲击侧滚 |
-| 10 | `n_dots` | 100 个点里只亮 3 个，比例一眼就懂 |
+| 10 | `n_dots` | 100个点里只亮3个，比例一眼就懂 |
 
 **结尾推荐**：`g_skybox`、`g_inkPaper`、`m_paperFold`、`k_stamp`。
 **揭示推荐**：`t_iris`、`g_spotlight`、`g_eraMorph`、`k_splitFlap`。
@@ -56,7 +56,7 @@ FXP.r_decision={tree:{l:'已经投了10万',c:[{l:'继续投',c:[{l:'越陷越�
 ```
 
 - `pick` 指定高亮路径上每一层选第几个子节点。
-- 节点弹入用弹簧缓动，标签 0.15 秒内出现，连线带发光。
+- 节点弹入用弹簧缓动，标签0.15秒内出现，连线带发光。
 - 预览：见 docs/previews 里的 r_* GIF。
 
 ## 索引
@@ -108,7 +108,7 @@ FXP.r_decision={tree:{l:'已经投了10万',c:[{l:'继续投',c:[{l:'越陷越�
 | 43 | `m_domino` | Dominoes / 多米诺 | 变形/物理 Morph | 小习惯→大结果 | ● | — | [gif](previews/m_domino.gif) | `examples/effect-library/one.sh m_domino` |
 | 44 | `m_explode` | Burst disperse / 爆裂散开 | 变形/物理 Morph | 泡沫破裂 | ● | `s`, `s2`, `col`, `at` | [gif](previews/m_explode.gif) | `examples/effect-library/one.sh m_explode` |
 | 45 | `g_depthPlate` | Depth-plate dolly / 场景板伪深度推镜 | 生图×代码 Image-gen | 开场交代年代 / hook | ●● 🖼 town.jpg | — | [gif](previews/g_depthPlate.gif) | `examples/effect-library/one.sh g_depthPlate` |
-| 46 | `g_tex3D` | Textured 3D prop / 生图纹理 3D 道具 | 生图×代码 Image-gen | 钱/文件/证据特写 | ●● 🖼 bill.jpg | — | [gif](previews/g_tex3D.gif) | `examples/effect-library/one.sh g_tex3D` |
+| 46 | `g_tex3D` | Textured 3D prop / 生图纹理3D 道具 | 生图×代码 Image-gen | 钱/文件/证据特写 | ●● 🖼 bill.jpg | — | [gif](previews/g_tex3D.gif) | `examples/effect-library/one.sh g_tex3D` |
 | 47 | `g_img2particles` | Image → particles → word / 图片碎成粒子聚字 | 生图×代码 Image-gen | 高潮：物变词 | ●● 🖼 watch.jpg | — | [gif](previews/g_img2particles.gif) | `examples/effect-library/one.sh g_img2particles` |
 | 48 | `g_diorama` | Diorama + draw-on notes / 微缩模型+手绘批注 | 生图×代码 Image-gen | 日常现象指出问题 | ●● 🖼 diorama.jpg | — | [gif](previews/g_diorama.gif) | `examples/effect-library/one.sh g_diorama` |
 | 49 | `g_eraMorph` | Era scan morph / 跨时代扫描变形 | 生图×代码 Image-gen | 技术/时代变迁 | ●● 🖼 phone-old.jpg,phone-new.jpg | — | [gif](previews/g_eraMorph.gif) | `examples/effect-library/one.sh g_eraMorph` |
@@ -148,7 +148,7 @@ FXP.r_decision={tree:{l:'已经投了10万',c:[{l:'继续投',c:[{l:'越陷越�
 
 `python3 engine/layoutcheck.py FILM` 查字压字、线穿字（glowLine 画的线）、框碰框（logShape 登记的框）、字出安全框（40px）。qa.py 会自动跑，结果在 qa/layoutcheck.json。新效果里的连线用 glowLine()，带框的标签用 logShape('box',…) 登记，节点标签放在节点旁边并加 plate:true 底板，不要放在连线进来的方向上。图片、粒子挡字查不到，仍要人工看 watch-*.jpg。
 
-对比度（CONTRAST）：每 0.25s 取每段文字框内背景像素的中位亮度，算文字色对背景的对比度，低于 3:1 且持续 ≥0.3s 就提示（切镜后 0.35s 不算）。暗色调色板的未选中文字用 THEME.dimText / boxOff / dimLine，不要写死灰色。
+对比度（CONTRAST）：每0.25s 取每段文字框内背景像素的中位亮度，算文字色对背景的对比度，低于3:1且持续 ≥0.3s 就提示（切镜后0.35s 不算）。暗色调色板的未选中文字用 THEME.dimText / boxOff / dimLine，不要写死灰色。
 
 ## 调色板（背景色变化，2026-10-31）
 
@@ -173,13 +173,13 @@ FXP.r_decision={tree:{l:'已经投了10万',c:[{l:'继续投',c:[{l:'越陷越�
 - 写新特效时颜色读 `THEME.x`，叠加模式写 `pBlend()`（深底 lighter，浅底 source-over），不要再写死 '#fff' / 'lighter'。
 
 跟着调色板变的：背景（底色、光晕、光束、尘）、`post` 暗角和前景尘、ambientDust、高潮闪光（slam/snap/drop）、`txt` 默认字色和金色渐变字、`particleForm`（所以 m_particleText 和所有粒子聚字），以及 k_slam（闪白）、k_splitFlap（翻牌底/字）、n_counter、r_treeGrow、r_mindmap、r_decision、g_img2particles、`node()`、`glowLine()`（树/图的线）。
-样片：`examples/palette-demo/`（7 套色 × 砸字 + 树/脑图/决策树/粒子字，节拍上换底色）。
+样片：`examples/palette-demo/`（7套色 × 砸字 + 树/脑图/决策树/粒子字，节拍上换底色）。
 
-## 2026-11-01 参数补全（成片要求：效果里不能有写死的占位字）
+## 2026-11-01参数补全（成片要求：效果里不能有写死的占位字）
 
 - `n_counter`：去掉了写死的占位小字「来自出处的数字」。新参数 `pre`/`suf`（前后缀，如 `£`、` 塞斯特斯`）、`label`（数字下面一行出处说明，不填就不画）、`y`、`size`。
 - `m_explode`：`s`（爆前的字，默认 泡沫）、`s2`（爆后的字，默认 破了）、`col`（球的颜色 `'r,g,b'`）、`at`（第几秒爆）。
-- `k_type`：自动换行（宽 `w` 默认 840，从 x=120 起，不再出安全区），`\n` 强制换行；`size`、`y`、`src`（打完后在下面淡入出处）。光标只在打字时闪。
+- `k_type`：自动换行（宽 `w` 默认840，从 x=120起，不再出安全区），`\n` 强制换行；`size`、`y`、`src`（打完后在下面淡入出处）。光标只在打字时闪。
 - `t_glitch`：`s`（闪断前）、`s2`（闪断后，默认同 `s`）。
-- `k_stamp`（11-01 晚）：去掉写死的「合同条款……」。新参数 `sub`（章上方一行小字，不填就不画）、`bg`（false 时不铺纸，直接盖在当前画面上）、`y`（章的中心）、`at`（第几秒落章，默认 0.6）。
+- `k_stamp`（11-01晚）：去掉写死的「合同条款……」。新参数 `sub`（章上方一行小字，不填就不画）、`bg`（false 时不铺纸，直接盖在当前画面上）、`y`（章的中心）、`at`（第几秒落章，默认0.6）。
 - 读字检查登记（2026-11-02）：`charAssemble` 按整句登记一次（透明度取最后一个字），不再按单字登记；`k_type` 打字过程中不登记，打完才按整行登记。读字时间从「整句都看得清」算起。
