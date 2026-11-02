@@ -1,0 +1,15 @@
+{
+  "_note": "富动效样片 15s：3D 开场 → 粒子聚字 → 图表生长变折线 → 硬币变钞票（物体变形转场）+视差 → 3D 招牌镜头穿环推进。",
+  "bpm": 120, "beats_per_bar": 4, "seed": 11,
+  "shots": [
+    {"id": "open3d",  "len": "7b", "in": "cut"},
+    {"id": "swarm",   "len": "6b", "in": "cut"},
+    {"id": "chart",   "len": "6b", "in": "match", "dir": "up"},
+    {"id": "morph",   "len": "5b", "in": "cut"},
+    {"id": "sig3d",   "len": "6b", "in": "cut"}
+  ],
+  "hits": [{"id": "anchor", "at": "shot:sig3d", "type": "snap", "main": true}],
+  "marks": {"hook_q": "3b"},
+  "sections": [{"at": 0, "energy": 1}, {"at": "7b", "energy": 2}, {"at": "19b", "energy": 3}],
+  "music": {"key": "E", "mode": "minor", "prog": "i-VI-III-VII", "drums": "broken", "arp": "wave", "lead": "marimba", "outro": "bell", "outro_at": "shot:sig3d"}
+}

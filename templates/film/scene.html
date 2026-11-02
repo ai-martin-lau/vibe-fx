@@ -1,0 +1,69 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>html,body{margin:0;background:#000}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script src="../../engine/vibe.js"></script>
+<script src="../../engine/anim.js"></script>
+<script src="../../engine/vendor/three.bundle.js"></script>
+<script src="../../engine/three3d.js"></script>
+<script>
+// 新片骨架：复制整个 templates/film 到 films/<日期-时段-选题>/ 后改这里。
+// 时间全在 rhythm.json：镜头 id、长度（拍）、进入转场（cut/match/carry/fade）、高潮类型。这里只按 id 画。
+// draw(t, lt)：t = 全片时间，lt = 镜头内时间。文字用 rise(…, lt, 起始)；高潮时刻用 HIT('id')，不写死秒数。
+// 规矩：默认硬切；切点那一帧就要有内容（别让文字从空画面慢慢浮出来）；fade 只在 rhythm.json 里显式写。
+const coin=(x,y,s)=>{g.save();g.fillStyle=`rgba(${THEME.glow},1)`;g.shadowColor=`rgba(${THEME.glow},.9)`;g.shadowBlur=30*s;
+  g.beginPath();g.arc(x,y,26*s,0,6.283);g.fill();g.restore()};
+const S=[
+ // 第 1 帧钩子：硬切开场，第 0 帧就是大数字
+ {id:'hook',draw(t,lt){
+   txt('99%',CX,860,{size:300,gold:true,glow:40});
+   txt('一句反直觉的结论',CX,1100,{size:64});
+   rise('你猜，为什么？',CX,1330,lt,M('hook_q'),{size:56,w:400});   // 第一个揭示 ≤3.5 秒（rhythm.json 的 mark）
+ }},
+ // 讲解：节奏慢，一屏只放一件事；镜头缓慢推近要看的数字（CAM.zoomIn）
+ {id:'explain',cam:(t,lt)=>CAM.zoomIn(lt,2,6,CX,1000,1.25),draw(t,lt){
+   txt('讲解的第一句',CX,820,{size:64});
+   rise('关键数字 12%',CX,1000,lt,1.2,{size:96,gold:true});
+   rise('补一句来源或口径',CX,1160,lt,3,{size:40,w:400,color:'rgba(243,236,224,.7)'});
+ }},
+ // 动作衔接（match，dir:up）：上一镜头往上推走，这个镜头从下面接住
+ {id:'detail',draw(t,lt){
+   txt('细节：说清一个机制',CX,860,{size:64});
+   rise('第二步',CX,1060,lt,1.5,{size:72,gold:true});
+   coin(CX,1300,1);   // 这枚硬币在本镜头最后一帧的位置 = 下一镜头 carry.from
+ }},
+ // 对象延续（carry）：硬币从上一镜头的位置飞到新位置，观众的眼睛跟着走
+ {id:'build',carry:{from:[CX,1300,1],to:[CX,700,1.8],draw:(t,x,y,s)=>coin(x,y,s)},draw(t,lt){
+   if(!carrying(lt))coin(CX,700,1.8);
+   txt('越来越快的铺垫',CX,1000,{size:64});   // 切进来就有字
+   rise('说一半……',CX,1160,lt,2.2,{size:56,w:400});
+ }},
+ // 揭晓：硬切，高潮就在切点（type:slam，前 1.5 拍自动收暗，最后 3 帧静止）
+ {id:'reveal',draw(t,lt){
+   slam('锚词',CX,1100,t,HIT('anchor'),{size:220});
+   rise('一句话解释它',CX,1380,lt,1.2,{size:56});
+ }},
+ // 结尾：这里 rhythm.json 显式写了 fade（1 拍交叉，透明度相加 = 1，没有空白帧）
+ {id:'close',draw(t,lt){
+   txt('一个人人能答的问题？',CX,950,{size:70});
+   rise('评论区，写下你的答案',CX,1100,lt,1,{size:46,w:400,color:'rgba(243,236,224,.8)'});
+   rise('数据来源：书名或报道',CX,1450,lt,2,{size:30,w:400,color:'rgba(243,236,224,.55)'});
+ }},
+];
+// ── 富动效（2026-10-31 起所有片子必用，见 docs/playbook.md「动效硬规则」；完整样例 examples/anim-demo/scene.html）──
+// 3D 开场/招牌镜头：每支片让模型单独写 setup/update，不要照抄样例：
+//   const OPEN=VIBE3D({dof:{focus:9,aperture:.004},bloom:{strength:.8},setup(T,scene,cam){…},update(lt,o,cam,api){api.orbit(lt,{r:12,h:2,a0:-.6,a1:.5,t1:3.5})}});
+//   镜头 draw：OPEN.draw(t,lt); 再画 2D 字
+// 粒子聚字 particleForm(textPoints('72',CX,820,420),lt,0,{out:2.4})；图表 chartGrow(vals,lt,0,{morph:1.5})
+// 逐字聚合 charAssemble(s,x,y,lt,t0,{size})；遮罩揭示 maskReveal(s,x,y,lt,t0)；物体变形 morphShape(polyCircle(…),polyRect(…),k)
+// 视差 parallax([{depth:.2,draw(){…}},{depth:1,draw(){…}}],t,{x,y,z})；曲线运镜 cam:SPLINECAM([[0,[CX,960,1.15]],[2,[CX,900,1]]])
+// 贴纸示例（片子目录下 stickers/*.png，透明底；PNG 不进 git）：
+// const BILL=STICKER('stickers/bill.png');
+// 某个镜头的 draw 里：sticker(BILL, 700, 620, t, HIT('main'), {w:380, rot:-8});
+VIBE_FILM({seed:7, theme:'jade', hook:'顶部钩子：一句悬念问句', scenes:S,
+  fontText:'99%一句反直觉的结论你猜为什么讲解的第一句关键数字12补来源或口径细节说清个机制第二步越来越快铺垫说一半锚词话解释它人人能答问题评论区写下答案数据来源书名或报道顶部钩子悬念问封面大字≤10',
+  cover(){ background(0); txt('99%',CX,640,{size:280,gold:true,glow:40}); txt('封面大字 ≤10 字',CX,900,{size:84}); post(0); },
+  // 4:3 横封面 1440×1080：竖版背景放大铺满，字放左边，右边留给本片的招牌道具
+  cover43(){ g.save();g.scale(4/3,4/3);g.translate(0,-540);background(0);g.restore();
+    txt('99%',420,520,{size:260,gold:true,glow:40}); txt('封面大字 ≤10 字',420,760,{size:80});
+    g.save();g.scale(4/3,4/3);g.translate(0,-540);post(0);g.restore(); }});
+</script></body></html>

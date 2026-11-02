@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:#000}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script src="../../../vibe.js"></script>
+<script src="../../../anim.js"></script>
+<script>
+// 逐字聚合的防撞回归：这些行在 2026-10-31 的三支片里都报过 TEXT×TEXT（字在飞行中互相压）。
+const L=window.SCATTER||'';   // test 会另建一份 SCATTER='random' 的副本，证明检测器真能抓到旧写法的压字
+const S=[
+ {id:'a',draw(t,lt){
+   charAssemble('钱在智者家，是仆人',CX,520,t,.1,{size:70,dur:.3,scatter:L});
+   charAssemble('活的年数，',CX,760,t,.4,{size:80,dur:.3,scatter:L});
+   charAssemble('一句挺长的测试文字',CX,1000,t,.8,{size:64,dur:.3,scatter:L,out:3.2});
+   charAssemble('这个星期，',CX,1240,t,1.2,{size:66,dur:.3,scatter:L});}},
+ {id:'b',draw(t,lt){
+   charAssemble('地界差一点，',CX,600,t,SHOT('b').a+.1,{size:66,dur:.3,scatter:L});
+   charAssemble('中了 100 万美元？',CX,900,t,SHOT('b').a+.3,{size:96,gold:true,dur:.5,scatter:L});
+   charAssemble('Stay hungry, stay foolish.',CX,1200,t,SHOT('b').a+.6,{size:60,dur:.4,scatter:L});}},
+];
+VIBE_FILM({seed:1, hook:'防撞测试', scenes:S, fontText:document.scripts[document.scripts.length-1].text});
+</script></body></html>

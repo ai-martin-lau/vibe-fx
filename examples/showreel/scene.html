@@ -1,0 +1,32 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>html,body{margin:0;background:#000}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script src="../../engine/vibe.js"></script>
+<script src="../../engine/anim.js"></script>
+<script src="../../engine/vendor/three.bundle.js"></script>
+<script src="../../engine/three3d.js"></script>
+<script src="../../engine/effects/fx.js"></script>
+<script>
+// Showreel: best effects from engine/effects/fx.js stitched with transitions on the beat. Images: ../effect-library/img (not in git).
+FXI('img/');
+FXP.k_slam={s:'钱会长大'};FXP.k_splitFlap={s:'复利'};FXP.r_constellation3D={s:'一路追到根源'};
+const LINE={g_depthPlate:'每个时代',g_eraMorph:'工具一直在变',c_orbit:'慢慢变多',g_skybox:'看远一点',r_mindmap:'路不止一条'};
+const TR={k_slam:'cut',g_depthPlate:'zoom',g_eraMorph:'whip',g_img2particles:'iris',k_splitFlap:'flash',r_treeGrow:'zoom',c_orbit:'whip',r_decision:'iris',t_shatter:'flash',r_constellation3D:'zoom',r_mindmap:'whip',g_skybox:'iris',end:'flash'};
+const sec=s=>parseFloat(s)*60/RHYTHM.bpm;
+const ENDP=textPoints('代码 × 生图',CX,940,170,6);
+function endCard(lt){g.fillStyle='#07080c';g.fillRect(0,0,W,H);particleForm(ENDP,lt,0,{dur:.9,seed:9});rise('一起把想法变成画面',CX,1180,lt,1.2,{size:54,color:'#ddd'})}
+const shots=RHYTHM.shots.map(s=>({id:s.id,len:s.b-s.a}));
+function drawShot(i,lt,t){const s=shots[i];if(s.id==='end')return endCard(lt);g.save();FXR[s.id].draw(lt,s.len,t);g.restore();
+ if(LINE[s.id])rise(LINE[s.id],CX,1640,lt,.25,{size:78,color:'#fff',glow:18})}
+const S=shots.map((s,i)=>({id:s.id,draw(t,lt){
+  // pre-roll: effects start slightly in so the first frame already has content
+  drawShot(i,lt,t);const tp=TR[s.id],d=.3;if(i===0||tp==='cut'||lt>=d)return;const k=eio(lt/d),p=shots[i-1];
+  g.save();
+  if(tp==='iris'){g.beginPath();g.rect(0,0,W,H);g.arc(CX,960,k*1300,0,7,true);g.clip('evenodd');drawShot(i-1,p.len,t);g.restore();g.strokeStyle=GOLD;g.lineWidth=12;g.beginPath();g.arc(CX,960,k*1300,0,7);g.stroke();return}
+  if(tp==='whip'){g.beginPath();g.rect(0,0,W*(1-k),H);g.clip();g.translate(-k*W,0);drawShot(i-1,p.len,t);g.restore();g.save();g.globalAlpha=Math.sin(Math.PI*k)*.6;for(let y=0;y<H;y+=40){g.fillStyle=y%80?'#fff3':'#0004';g.fillRect(0,y,W,10+20*Math.sin(Math.PI*k))}g.restore();return}
+  if(tp==='zoom'){g.globalAlpha=1-k;g.translate(CX,960);g.scale(1+k*2.5,1+k*2.5);g.translate(-CX,-960);drawShot(i-1,p.len,t);g.restore();return}
+  if(tp==='flash'){g.restore();g.fillStyle=`rgba(255,244,220,${1-k})`;g.fillRect(0,0,W,H);return}
+  g.restore()}}));
+VIBE_FILM({seed:9,theme:'gold',scenes:S,fontText:'钱会长大每个时代工具一直在变慢慢变多看远一点路不止一条复利一路追到根源代码×生图一起把想法变成画面时间以前现在你以为其实已经投了10万继续投越陷越深侥幸回本及时止损损失封顶重新出发收益率早开始不中断低成本分散本金储蓄率加薪副业写作剪视频设计带货咨询编程1920s今天',
+ cover(){background(0);txt('代码 × 生图',CX,900,{size:150,gold:true})},cover43(){background(0);txt('代码 × 生图',CX,800,{size:130,gold:true})}});
+</script></body></html>

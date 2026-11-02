@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>html,body{margin:0;background:#000}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script src="../../engine/vibe.js"></script>
+<script src="../../engine/anim.js"></script>
+<script src="../../engine/vendor/three.bundle.js"></script>
+<script src="../../engine/three3d.js"></script>
+<script src="../../engine/effects/fx.js"></script>
+<script>
+// Palette demo: same effects on 7 palettes. Palette per section comes from rhythm.json sections[].palette (tr: fade / iris / wipe), switched on the slam beat.
+const NAMES=['gold','paper','sea','forest','wine','mist','sunset'];
+const S=RHYTHM.shots.map(s=>({id:s.id,draw(t,lt){const i=+s.id[1],fx=s.id.slice(3);
+  if(fx==='slam'){FXP.k_slam={s:PALETTES[NAMES[i]].zh||'暗金'};FXR.k_slam.draw(lt+.25,s.b-s.a,t);
+    rise(NAMES[i],CX,1250,lt,.5,{size:54,color:THEME.text,a:.75});return}
+  g.save();FXR[fx].draw(lt+.15,s.b-s.a,t);g.restore()}}));
+VIBE_FILM({seed:11,scenes:S,fontText:'暗金米纸深海蓝墨绿酒红雾白日落goldpaperseaforestwinemistsunset钱会长大每个时代工具一直在变慢慢变多看远一点路不止一条复利一路追到根源代码×生图一起把想法变成画面时间以前现在你以为其实已经投了10万继续投越陷越深侥幸回本及时止损损失封顶重新出发收益率早开始不中断低成本分散本金储蓄率加薪副业写作剪视频设计带货咨询编程杠杆知识',
+ cover(){background(0);txt('调色板',CX,900,{size:150,gold:true})},cover43(){background(0);txt('调色板',CX,800,{size:130,gold:true})}});
+</script></body></html>

@@ -1,0 +1,176 @@
+{
+ "_note": "effect showreel",
+ "bpm": 120,
+ "beats_per_bar": 4,
+ "seed": 9,
+ "shots": [
+  {
+   "id": "k_slam",
+   "len": "4b",
+   "in": "cut"
+  },
+  {
+   "id": "g_depthPlate",
+   "len": "6b",
+   "in": "cut"
+  },
+  {
+   "id": "g_eraMorph",
+   "len": "6b",
+   "in": "cut"
+  },
+  {
+   "id": "g_img2particles",
+   "len": "6b",
+   "in": "cut"
+  },
+  {
+   "id": "k_splitFlap",
+   "len": "5b",
+   "in": "cut"
+  },
+  {
+   "id": "r_treeGrow",
+   "len": "6b",
+   "in": "cut"
+  },
+  {
+   "id": "c_orbit",
+   "len": "6b",
+   "in": "cut"
+  },
+  {
+   "id": "r_decision",
+   "len": "6b",
+   "in": "cut"
+  },
+  {
+   "id": "t_shatter",
+   "len": "5b",
+   "in": "cut"
+  },
+  {
+   "id": "r_constellation3D",
+   "len": "6b",
+   "in": "cut"
+  },
+  {
+   "id": "r_mindmap",
+   "len": "6b",
+   "in": "cut"
+  },
+  {
+   "id": "g_skybox",
+   "len": "6b",
+   "in": "cut"
+  },
+  {
+   "id": "end",
+   "len": "8b",
+   "in": "cut"
+  }
+ ],
+ "hits": [
+  {
+   "id": "h_k_slam",
+   "at": "shot:k_slam",
+   "type": "snap",
+   "main": true
+  },
+  {
+   "id": "h_g_depthPlate",
+   "at": "shot:g_depthPlate",
+   "type": "snap",
+   "main": false
+  },
+  {
+   "id": "h_g_eraMorph",
+   "at": "shot:g_eraMorph",
+   "type": "snap",
+   "main": false
+  },
+  {
+   "id": "h_g_img2particles",
+   "at": "shot:g_img2particles",
+   "type": "snap",
+   "main": false
+  },
+  {
+   "id": "h_k_splitFlap",
+   "at": "shot:k_splitFlap",
+   "type": "snap",
+   "main": false
+  },
+  {
+   "id": "h_r_treeGrow",
+   "at": "shot:r_treeGrow",
+   "type": "snap",
+   "main": false
+  },
+  {
+   "id": "h_c_orbit",
+   "at": "shot:c_orbit",
+   "type": "snap",
+   "main": false
+  },
+  {
+   "id": "h_r_decision",
+   "at": "shot:r_decision",
+   "type": "snap",
+   "main": false
+  },
+  {
+   "id": "h_t_shatter",
+   "at": "shot:t_shatter",
+   "type": "snap",
+   "main": false
+  },
+  {
+   "id": "h_r_constellation3D",
+   "at": "shot:r_constellation3D",
+   "type": "snap",
+   "main": false
+  },
+  {
+   "id": "h_r_mindmap",
+   "at": "shot:r_mindmap",
+   "type": "snap",
+   "main": false
+  },
+  {
+   "id": "h_g_skybox",
+   "at": "shot:g_skybox",
+   "type": "snap",
+   "main": false
+  },
+  {
+   "id": "h_end",
+   "at": "shot:end",
+   "type": "snap",
+   "main": false
+  }
+ ],
+ "marks": {},
+ "sections": [
+  {
+   "at": 0,
+   "energy": 3
+  }
+ ],
+ "montage": [
+  [
+   0,
+   38.0
+  ]
+ ],
+ "music": {
+  "key": "D",
+  "mode": "minor",
+  "prog": "i-VI-III-VII",
+  "drums": "broken",
+  "arp": "wave",
+  "lead": "marimba",
+  "outro": "bell",
+  "outro_at": "shot:end"
+ }
+}

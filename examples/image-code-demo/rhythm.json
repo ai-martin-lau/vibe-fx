@@ -1,0 +1,7 @@
+{"_note":"生图+代码 样片 18s：①生图场景板+伪深度 3D 推镜 ②生图纹理贴到 3D 钞票上环绕 ③生图物体碎成粒子再聚成字 ④等距微缩模型+代码手绘批注",
+ "bpm":120,"beats_per_bar":4,"seed":5,
+ "shots":[{"id":"plate","len":"9b","in":"cut"},{"id":"bill","len":"9b","in":"cut"},{"id":"swarm","len":"9b","in":"cut"},{"id":"dio","len":"9b","in":"cut"}],
+ "hits":[{"id":"form","at":"23b","type":"snap","main":true}],
+ "marks":{"p1":"1b","p2":"4b","b1":"10b","b2":"13b","s1":"19b","d1":"28b","d2":"31b","d3":"34b"},
+ "sections":[{"at":0,"energy":1},{"at":"9b","energy":2},{"at":"18b","energy":3}],
+ "music":{"key":"D","mode":"minor","prog":"i-VI-III-VII","drums":"broken","arp":"wave","lead":"marimba","outro":"bell","outro_at":"shot:dio"}}

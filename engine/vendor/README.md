@@ -1,0 +1,1 @@
+three.bundle.js = three@0.170.0 + postprocessing addons (EffectComposer, RenderPass, UnrealBloomPass, BokehPass, ShaderPass, OutputPass, RoomEnvironment), bundled with esbuild as IIFE → window.THREE / window.THREEX. MIT, Copyright © 2010-2024 three.js authors (https://github.com/mrdoob/three.js/blob/dev/LICENSE). Loaded via <script> so file:// works without ES modules.

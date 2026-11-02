@@ -1,0 +1,55 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>html,body{margin:0;background:#000}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script src="../../engine/vibe.js"></script>
+<script src="../../engine/anim.js"></script>
+<script src="../../engine/vendor/three.bundle.js"></script>
+<script src="../../engine/three3d.js"></script>
+<script>
+const I_TOWN=STICKER('img/town.jpg'),I_BILL=STICKER('img/bill.jpg'),I_WATCH=STICKER('img/watch.jpg'),I_DIO=STICKER('img/diorama.jpg');
+function texOf(T,im){const tx=new T.Texture(im);tx.colorSpace=T.SRGBColorSpace;return tx}
+function upd(tx,im){if(!tx._ok&&im.complete&&im.naturalWidth){tx.needsUpdate=true;tx._ok=1}}
+// ① 场景板 + 伪深度：图贴在细分平面上，按「离消失点越远越近」抬起顶点，相机推进就有真视差
+const PLATE=VIBE3D({fov:50,bloom:{strength:.5,threshold:.7},grade:{sat:1.1,warm:.04,vig:.5},dof:{focus:8,aperture:.0006},
+ setup(T,scene){const geo=new T.PlaneGeometry(9,16,90,160);const p=geo.attributes.position,uv=geo.attributes.uv;
+  for(let i=0;i<p.count;i++){const u=uv.getX(i),v=uv.getY(i);const dx=(u-.42)*1.6,dy=(v-.47)*1.1;let d=Math.min(1,Math.hypot(dx,dy));if(v>.5)d*=.35;p.setZ(i,d*d*5)}
+  geo.computeVertexNormals();const tx=texOf(T,I_TOWN);const m=new T.Mesh(geo,new T.MeshBasicMaterial({map:tx}));scene.add(m);return{tx}},
+ update(lt,o,cam,api){upd(o.tx,I_TOWN);api.dolly(lt,[[0,[0,-.6,16]],[2.2,[.5,-1.4,11.5]],[4.5,[-.3,-2,8.5]]],[-.6,-.6,0])}});
+// ② 生图纹理贴到弯曲的 3D 钞票上，相机环绕 + 钞票翻面
+const BILL=VIBE3D({fov:38,bloom:{strength:.35,threshold:.92},grade:{sat:1.1,warm:.06,vig:.55},dof:{focus:9,aperture:.003},
+ setup(T,scene){const geo=new T.PlaneGeometry(6.4,3.6,64,8);const p=geo.attributes.position;for(let i=0;i<p.count;i++)p.setZ(i,Math.sin(p.getX(i)*.6)*.35);geo.computeVertexNormals();
+  const tx=texOf(T,I_BILL);const m=new T.Mesh(geo,new T.MeshStandardMaterial({map:tx,roughness:.7,side:T.DoubleSide}));scene.add(m);
+  const L=new T.PointLight(0xffe2b0,14,40);L.position.set(3,4,6);scene.add(L);scene.add(new T.AmbientLight(0xffffff,.55));return{m,tx}},
+ update(lt,o,cam,api){upd(o.tx,I_BILL);o.m.rotation.z=lerp(-.5,.15,eio(A_clamp(lt/3)));o.m.rotation.y=Math.sin(lt*1.3)*.25;o.m.position.y=1.2+Math.sin(lt*2)*.1;
+  api.orbit(lt,{r:lerp(16,11.5,eio(lt/4.5)),h:lerp(-3,1,eio(lt/4.5)),a0:-.9,a1:.6,t0:0,t1:4.5,target:[0,1,0]});api.focusOn(cam.position.distanceTo(o.m.position))}});
+// ③ 生图物体 → 带原色的粒子 → 聚成字
+let WP=null;function watchPts(){if(WP||!I_WATCH.naturalWidth)return WP;const n=360,o=document.createElement('canvas');o.width=o.height=n;const og=o.getContext('2d');og.drawImage(I_WATCH,0,0,n,n);
+ const d=og.getImageData(0,0,n,n).data;WP=[];for(let y=0;y<n;y+=4)for(let x=0;x<n;x+=4){const k=(y*n+x)*4;if(d[k]+d[k+1]+d[k+2]>110)WP.push([CX+(x-n/2)*2.4,820+(y-n/2)*2.4,d[k],d[k+1],d[k+2]])}return WP}
+function swarm(lt,t1){const P=watchPts();if(!P)return;const T=textPoints('时间',CX,820,330,6);const R=mulberry32(4);g.save();g.globalCompositeOperation='lighter';
+ const M=matchPts(P,T,'swarm');for(let i=0;i<M.length;i++){const[p,q]=M[i],a=R()*6.28,sp=200+R()*500,del=R()*.35;
+  const k1=A_clamp((lt-1.2-del*.6)/.7),k2=eio(A_clamp((lt-t1+.3-del)/.8));let x=p[0]+Math.cos(a)*sp*eo(k1),y=p[1]+Math.sin(a)*sp*eo(k1)-60*k1;
+  x=lerp(x,q[0],k2);y=lerp(y,q[1],k2);const c=k2>.5?[255,200,110]:[p[2],p[3],p[4]];g.fillStyle=`rgb(${c})`;const r=lerp(2.6,2,k2);g.fillRect(x-r,y-r,r*2,r*2)}g.restore()}
+// ④ 等距微缩模型漂浮 + 代码手绘批注逐笔画出
+function drawOn(pts,k){if(k<=0)return;g.save();g.strokeStyle='#ffd27a';g.lineWidth=9;g.lineCap=g.lineJoin='round';g.shadowColor='rgba(255,190,90,.7)';g.shadowBlur=14;
+ const n=Math.max(2,Math.floor(pts.length*A_clamp(k)));g.beginPath();for(let i=0;i<n;i++)i?g.lineTo(...pts[i]):g.moveTo(...pts[i]);g.stroke();g.restore()}
+function ring(cx,cy,rx,ry){const p=[];for(let i=0;i<=60;i++){const a=i/60*6.6-1.4;p.push([cx+Math.cos(a)*rx*(1+.04*Math.sin(i)),cy+Math.sin(a)*ry])}return p}
+const S=[
+ {id:'plate',ambient:false,draw(t,lt){PLATE.draw(t,lt);g.fillStyle='rgba(0,0,0,.35)';g.fillRect(0,1180,W,420);
+   rise('一张生成的画',CX,1300,lt,M('p1'),{size:84});rise('代码给它装上镜头',CX,1430,lt,M('p2')-0,{size:64,gold:true})}},
+ {id:'bill',ambient:false,draw(t,lt){BILL.draw(t,lt);const a=SHOT('bill').a;
+   rise('生图做纹理',CX,1600,lt,M('b1')-a,{size:84});rise('贴到 3D 物体上转起来',CX,1720,lt,M('b2')-a,{size:60,gold:true})}},
+ {id:'swarm',draw(t,lt){background(t);const P=watchPts();const a=SHOT('swarm').a,t1=M('form')-a;
+   if(lt<1.4&&I_WATCH.naturalWidth){const s=1+.04*lt;g.save();g.globalAlpha=A_clamp(1-(lt-1.1)/.3);g.drawImage(I_WATCH,CX-432*s,820-432*s,864*s,864*s);g.restore()}
+   swarm(lt,t1);if(lt<t1)rise('真实物件',CX,1420,lt,M('s1')-a-.5,{size:72});if(lt>=t1)rise('碎成粒子，聚成一个词',CX,1420,lt,t1+.1,{size:60,gold:true})}},
+ {id:'dio',draw(t,lt){g.fillStyle='#1b2546';g.fillRect(0,0,W,H);const a=SHOT('dio').a;const bob=Math.sin(lt*2.2)*14,s=lerp(.85,1,eo(A_clamp(lt/.5)));
+   parallax([{depth:.2,draw(){for(let i=0;i<14;i++)txt('·',(i*173)%W,300+((i*311)%1300),{size:90,a:.25})}},
+     {depth:1,draw(){g.save();g.translate(CX,860+bob);g.scale(s,s);g.drawImage(I_DIO,-480,-480,960,960);g.restore()}}],t,{x:Math.sin(lt*1.1)*50,y:0,z:1+.05*lt});
+   const k=lt-(M('d1')-a);drawOn(ring(CX+65,620+bob,120,100),k/.5);
+   drawOn([[CX-200,1010+bob],[CX-90,1110+bob],[CX+150,940+bob]].map(([x,y])=>[x,y]),(lt-(M('d2')-a))/.4);
+   rise('微缩模型 + 手绘批注',CX,1440,lt,M('d1')-a,{size:68});rise('一笔一笔画出来',CX,1560,lt,M('d3')-a,{size:60,gold:true})}},
+];
+VIBE_FILM({seed:5,theme:'gold',hook:'生图加代码',scenes:S,
+ fontText:'一张生成的画代码给它装上镜头生图做纹理贴到3D物体上转起来真实物件碎成粒子，聚成个词微缩模型+手绘批注笔画出来时间加·',
+ cover(){background(0);txt('生图×代码',CX,640,{size:180,gold:true,glow:40});post(0)},
+ cover43(){background(0);txt('生图×代码',CX,700,{size:160,gold:true,glow:40});post(0)}});
+</script></body></html>

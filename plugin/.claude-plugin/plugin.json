@@ -1,0 +1,7 @@
+{
+  "name": "vibe-fx",
+  "description": "Generated-image x code motion effects for vertical (9:16) short videos, rendered frame by frame with automatic QA.",
+  "author": { "name": "ai-martin-lau", "url": "https://github.com/ai-martin-lau" },
+  "repository": "https://github.com/ai-martin-lau/vibe-fx",
+  "license": "MIT"
+}

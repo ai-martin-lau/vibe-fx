@@ -1,0 +1,21 @@
+out/
+frames/
+stills*/
+overview/
+*.mp4
+*.mov
+*.wav
+*.mp3
+*.m4a
+*.aac
+*.zip
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+.env
+*.env
+**/stickers/*.png
+# generated example images are shipped on purpose
+*.bak

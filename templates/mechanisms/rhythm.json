@@ -1,0 +1,79 @@
+{
+  "_note": "机制组件 + 镜头运动演示（约 30 秒）。5 个机制各一个镜头，展示 follow / zoomIn / pullBack 三种镜头运动。",
+  "bpm": 96,
+  "beats_per_bar": 4,
+  "seed": 31,
+  "shots": [
+    {
+      "id": "compound",
+      "len": "10b",
+      "in": "cut"
+    },
+    {
+      "id": "leverage",
+      "len": "8b",
+      "in": "match",
+      "dir": "left"
+    },
+    {
+      "id": "funnel",
+      "len": "10b",
+      "in": "cut"
+    },
+    {
+      "id": "depletion",
+      "len": "8b",
+      "in": "cut"
+    },
+    {
+      "id": "loop",
+      "len": "12b",
+      "in": "cut"
+    }
+  ],
+  "hits": [
+    {
+      "id": "lift",
+      "at": "14b",
+      "type": "snap"
+    },
+    {
+      "id": "empty",
+      "at": "shot:loop",
+      "type": "drop",
+      "pre": "2b",
+      "main": true
+    }
+  ],
+  "sections": [
+    {
+      "at": 0,
+      "energy": 1
+    },
+    {
+      "at": "18b",
+      "energy": 2
+    },
+    {
+      "at": "shot:loop",
+      "energy": 3
+    },
+    {
+      "at": "44b",
+      "energy": 0
+    }
+  ],
+  "marks": {
+    "outro": "44b"
+  },
+  "music": {
+    "key": "E",
+    "mode": "major",
+    "prog": "IV-I-V-vi",
+    "drums": "half",
+    "arp": "pulse",
+    "lead": "bell",
+    "outro": "pad",
+    "outro_at": "mark:outro"
+  }
+}

@@ -1,0 +1,7 @@
+{
+ "_note": "test_kinetic_overlap.py 用的最小片：一个镜头里排几行 charAssemble（中文、标点、数字、英文混排，大小字号，带 out 退场），layoutcheck 不能报 TEXT×TEXT。",
+ "bpm": 120, "beats_per_bar": 4, "seed": 1,
+ "shots": [{"id": "a", "len": "8b", "in": "cut"}, {"id": "b", "len": "8b", "in": "cut"}],
+ "hits": [], "marks": {}, "sections": [{"at": 0, "energy": 1}],
+ "music": {"key": "C", "mode": "major", "prog": "I-V-vi-IV", "drums": "broken", "arp": "wave", "lead": "marimba"}
+}

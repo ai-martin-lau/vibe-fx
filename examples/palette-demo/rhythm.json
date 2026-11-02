@@ -1,0 +1,188 @@
+{
+ "_note": "palette demo",
+ "bpm": 120,
+ "beats_per_bar": 4,
+ "seed": 11,
+ "shots": [
+  {
+   "id": "s0_slam",
+   "len": "3b",
+   "in": "cut"
+  },
+  {
+   "id": "s0_r_treeGrow",
+   "len": "4b",
+   "in": "cut"
+  },
+  {
+   "id": "s1_slam",
+   "len": "3b",
+   "in": "cut"
+  },
+  {
+   "id": "s1_r_mindmap",
+   "len": "4b",
+   "in": "cut"
+  },
+  {
+   "id": "s2_slam",
+   "len": "3b",
+   "in": "cut"
+  },
+  {
+   "id": "s2_r_decision",
+   "len": "4b",
+   "in": "cut"
+  },
+  {
+   "id": "s3_slam",
+   "len": "3b",
+   "in": "cut"
+  },
+  {
+   "id": "s3_m_particleText",
+   "len": "4b",
+   "in": "cut"
+  },
+  {
+   "id": "s4_slam",
+   "len": "3b",
+   "in": "cut"
+  },
+  {
+   "id": "s4_r_treeGrow",
+   "len": "4b",
+   "in": "cut"
+  },
+  {
+   "id": "s5_slam",
+   "len": "3b",
+   "in": "cut"
+  },
+  {
+   "id": "s5_r_mindmap",
+   "len": "4b",
+   "in": "cut"
+  },
+  {
+   "id": "s6_slam",
+   "len": "3b",
+   "in": "cut"
+  },
+  {
+   "id": "s6_r_decision",
+   "len": "4b",
+   "in": "cut"
+  }
+ ],
+ "hits": [
+  {
+   "id": "hs0_slam",
+   "at": "shot:s0_slam",
+   "type": "snap",
+   "main": false
+  },
+  {
+   "id": "hs1_slam",
+   "at": "shot:s1_slam",
+   "type": "snap",
+   "main": false
+  },
+  {
+   "id": "hs2_slam",
+   "at": "shot:s2_slam",
+   "type": "snap",
+   "main": false
+  },
+  {
+   "id": "hs3_slam",
+   "at": "shot:s3_slam",
+   "type": "snap",
+   "main": false
+  },
+  {
+   "id": "hs4_slam",
+   "at": "shot:s4_slam",
+   "type": "snap",
+   "main": false
+  },
+  {
+   "id": "hs5_slam",
+   "at": "shot:s5_slam",
+   "type": "snap",
+   "main": false
+  },
+  {
+   "id": "hs6_slam",
+   "at": "shot:s6_slam",
+   "type": "snap",
+   "main": true
+  }
+ ],
+ "marks": {},
+ "sections": [
+  {
+   "at": "shot:s0_slam",
+   "energy": 2,
+   "palette": "gold",
+   "tr": "fade",
+   "d": 0.45
+  },
+  {
+   "at": "shot:s1_slam",
+   "energy": 3,
+   "palette": "paper",
+   "tr": "fade",
+   "d": 0.45
+  },
+  {
+   "at": "shot:s2_slam",
+   "energy": 3,
+   "palette": "sea",
+   "tr": "iris",
+   "d": 0.45
+  },
+  {
+   "at": "shot:s3_slam",
+   "energy": 3,
+   "palette": "forest",
+   "tr": "wipe",
+   "d": 0.45
+  },
+  {
+   "at": "shot:s4_slam",
+   "energy": 3,
+   "palette": "wine",
+   "tr": "fade",
+   "d": 0.45
+  },
+  {
+   "at": "shot:s5_slam",
+   "energy": 3,
+   "palette": "mist",
+   "tr": "iris",
+   "d": 0.45
+  },
+  {
+   "at": "shot:s6_slam",
+   "energy": 3,
+   "palette": "sunset",
+   "tr": "wipe",
+   "d": 0.45
+  }
+ ],
+ "montage": [
+  [
+   0,
+   24.5
+  ]
+ ],
+ "music": {
+  "key": "A",
+  "mode": "minor",
+  "prog": "i-VI-III-VII",
+  "drums": "broken",
+  "arp": "wave",
+  "lead": "marimba"
+ }
+}

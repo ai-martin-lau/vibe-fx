@@ -1,0 +1,21 @@
+{
+  "_note": "新片节奏表模板。画面（scene.html）和声音（audio.py）都读这一份：改镜头长短、转场、高潮只改这里。BPM、和弦、鼓型、尾声每片都要重新选，别照抄。",
+  "bpm": 84,
+  "beats_per_bar": 4,
+  "tempo": [{"at": "24b", "bpm": 100}],
+  "seed": 7,
+  "shots": [
+    {"id": "hook",    "len": "6b",   "in": "cut"},
+    {"id": "explain", "len": "10b",  "in": "cut"},
+    {"id": "detail",  "len": "7.5b", "in": "match", "dir": "up"},
+    {"id": "build",   "len": "8.5b", "in": "carry", "carry": "1b"},
+    {"id": "reveal",  "len": "8b",   "in": "cut"},
+    {"id": "close",   "len": "8b",   "in": "fade", "fade": "1b"}
+  ],
+  "hits": [
+    {"id": "anchor", "at": "shot:reveal", "type": "slam", "main": true}
+  ],
+  "marks": {"hook_q": "3.5b", "guess": "18b"},
+  "sections": [{"at": 0, "energy": 0}, {"at": "6b", "energy": 1}, {"at": "16b", "energy": 2}, {"at": "24b", "energy": 3}, {"at": "shot:close", "energy": 0}],
+  "music": {"key": "D", "mode": "minor", "prog": "i-iv-VI-V", "drums": "broken", "arp": "wave", "lead": "marimba", "outro": "bell", "outro_at": "shot:close"}
+}
