@@ -18,6 +18,18 @@ AI 写动画代码，生图模型提供真实质感的素材，无头浏览器�
 
 <p align="center"><img src="docs/previews/all-effects.jpg" width="720" alt="all effects"></p>
 
+## Remotion 版（2026-11-04）
+`remotion/` 里是用 Remotion 重做的27个组件（22个重做、5个新增），统一电影感：暖调、胶片颗粒、暗角、一种无衬线字、一个琥珀强调色。取舍见 [docs/remotion-remake.md](docs/remotion-remake.md)。
+
+<p align="center"><img src="docs/previews/remotion-overview.jpg" width="720" alt="remotion effects"></p>
+
+```bash
+cd remotion && npm install
+npx remotion studio src/index.ts                          # 逐个预览
+npx remotion render src/index.ts ContrastPair out/a.mp4   # 单个效果出片
+./render-stills.sh                                        # 全部样片 + 总览图
+```
+
 ## 环境要求
 - Python 3.10+，运行 `pip install playwright numpy scipy soundfile pillow` 和 `python3 -m playwright install chromium`
 - ffmpeg

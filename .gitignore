@@ -19,3 +19,4 @@ node_modules/
 **/stickers/*.png
 # generated example images are shipped on purpose
 *.bak
+remotion/node_modules

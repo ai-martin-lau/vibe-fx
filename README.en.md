@@ -18,6 +18,19 @@ All 63 effects on one sheet (one frame per effect):
 
 <p align="center"><img src="docs/previews/all-effects.jpg" width="720" alt="all effects"></p>
 
+
+## Remotion edition (2026-11-04)
+`remotion/` holds 27 Remotion components (22 remade, 5 new) in one cinema look: warm grade, film grain, vignette, one sans font, one amber accent. Decisions: [docs/remotion-remake.md](docs/remotion-remake.md)。
+
+<p align="center"><img src="docs/previews/remotion-overview.jpg" width="720" alt="remotion effects"></p>
+
+```bash
+cd remotion && npm install
+npx remotion studio src/index.ts                          # preview
+npx remotion render src/index.ts ContrastPair out/a.mp4   # render one
+./render-stills.sh                                        # all demos + overview
+```
+
 ## Requirements
 - Python 3.10+ with `pip install playwright numpy scipy soundfile pillow` and `python3 -m playwright install chromium`
 - ffmpeg
