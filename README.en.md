@@ -24,6 +24,8 @@ All 63 effects on one sheet (one frame per effect):
 
 <p align="center"><img src="docs/previews/remotion-overview.jpg" width="720" alt="remotion effects"></p>
 
+<p align="center">Static 3:4 pages (3 frames per effect)<br><img src="docs/previews/xhs/1.jpg" width="24%"> <img src="docs/previews/xhs/2.jpg" width="24%"> <img src="docs/previews/xhs/3.jpg" width="24%"> <img src="docs/previews/xhs/4.jpg" width="24%"> </p>
+
 ```bash
 cd remotion && npm install
 npx remotion studio src/index.ts                          # preview

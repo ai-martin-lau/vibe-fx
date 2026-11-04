@@ -23,6 +23,8 @@ AI 写动画代码，生图模型提供真实质感的素材，无头浏览器�
 
 <p align="center"><img src="docs/previews/remotion-overview.jpg" width="720" alt="remotion effects"></p>
 
+<p align="center">小红书版静态图（3:4，每个动效3帧）<br><img src="docs/previews/xhs/1.jpg" width="24%"> <img src="docs/previews/xhs/2.jpg" width="24%"> <img src="docs/previews/xhs/3.jpg" width="24%"> <img src="docs/previews/xhs/4.jpg" width="24%"> </p>
+
 ```bash
 cd remotion && npm install
 npx remotion studio src/index.ts                          # 逐个预览
